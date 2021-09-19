@@ -76,6 +76,12 @@ exec_always --no-startup-id setcursor
 exec_always --no-startup-id numlockx on
 exec blueberry-tray
 exec --no-startup-id java -Xmx1024m -jar "/opt/xdman/xdman.jar" -m
+exec --no-startup-id "xinput set-prop \"MSFT0001:00 06CB:7F28 Touchpad\" \"libinput Tapping Enabled\" 1"
+exec --no-startup-id "xinput set-prop \"MSFT0001:00 06CB:7F28 Touchpad\" \"libinput Click Method Enabled\" 0 1"
+exec --no-startup-id "xinput set-prop \"MSFT0001:00 06CB:7F28 Touchpad\" \"libinput Natural Scrolling Enabled\" 1"
+
+#bindsym $mod+2 workspace 2:web; layout tabbed; exec [ $(ps h -C firefox | wc -l) = 0 ] && /usr/bin/firefox -s
+#exec_always --no-startup-id i3-msh 'workspace 1; /usr/bin/chromium --profile-directory=Default --app-id=hnpfjngllnobngcgfapefoaidbinmjnm;'
 
 # hide/unhide i3status bar
 bindsym $super+m bar mode toggle
@@ -231,7 +237,7 @@ bindsym $super+n border normal
 
 bar {
 	position top
-	status_command exec /usr/bin/bumblebee-status -m spotify weather datetime cpu memory disk pasource pasink battery -p disk.format="{used}" memory.format="{used}" datetime.format="%a, %b %d | %H:%M:%S" traffic.showname=False -t iceberg-dark-powerline
+  status_command exec /usr/bin/bumblebee-status -m spotify weather datetime cpu memory disk pasource pasink battery -p disk.format="{used}" memory.format="{used}" datetime.format="%a, %b %d | %H:%M:%S" traffic.showname=False -t iceberg-dark-powerline
 	#strip_workspace_numbers yes|no
 	#strip_workspace_name yes|no
 	colors {
@@ -283,6 +289,10 @@ for_window [class="garuda-welcome"] floating enable
 
 # window rules, you can find the window class using xprop
 for_window [class=".*"] border pixel 0
+
+
+
+
 assign [class=URxvt] 1
 for_window [class=Viewnior|feh|Audacious|File-roller|Lxappearance|Lxtask|Pavucontrol|upgrade2ultimate.sh] floating enable
 for_window [class=URxvt|firedragon|Geany|Evince|Soffice|libreoffice*|mpv|Ghb|Xfburn|Gimp*|Inkscape|Vlc|Lxappearance|Audacity] focus

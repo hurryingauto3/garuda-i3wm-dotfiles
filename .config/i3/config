@@ -16,7 +16,7 @@ set $alt Mod1
 ### Wallpaper: ###
 # - You need to specify homescreen wallpaper using azote
 
-set $lockScreenWallpaper ~/Pictures/desk.png
+set $lockScreenWallpaper ~/Pictures/wallpapers/desk.png
 
 ### Applications: ###
 
@@ -72,29 +72,30 @@ exec --no-startup-id /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1
 exec --no-startup-id xfce4-power-manager
 exec_always --no-startup-id ff-theme-util
 exec_always --no-startup-id setcursor
-#exec_always --no-startup-id ${HOME}/.config/polybar/launch.sh
+# exec_always --no-startup-id ~/.config/polybar/launch.sh --grayblocks
 exec_always --no-startup-id numlockx on
-exec blueberry-tray
+exec --no-startup-id blueberry-tray
 exec --no-startup-id java -Xmx1024m -jar "/opt/xdman/xdman.jar" -m
 exec --no-startup-id "xinput set-prop \"MSFT0001:00 06CB:7F28 Touchpad\" \"libinput Tapping Enabled\" 1"
 exec --no-startup-id "xinput set-prop \"MSFT0001:00 06CB:7F28 Touchpad\" \"libinput Click Method Enabled\" 0 1"
 exec --no-startup-id "xinput set-prop \"MSFT0001:00 06CB:7F28 Touchpad\" \"libinput Natural Scrolling Enabled\" 1"
 
-#bindsym $mod+2 workspace 2:web; layout tabbed; exec [ $(ps h -C firefox | wc -l) = 0 ] && /usr/bin/firefox -s
-#exec_always --no-startup-id i3-msh 'workspace 1; /usr/bin/chromium --profile-directory=Default --app-id=hnpfjngllnobngcgfapefoaidbinmjnm;'
+
+
 
 # hide/unhide i3status bar
 bindsym $super+m bar mode toggle
 
 # start dmenu (a program launcher)
-bindsym $super+d exec i3-dmenu-desktop --dmenu="dmenu -i -fn 'Noto Sans:size=11'"
+bindsym $super+d exec --no-startup-id i3-dmenu-desktop --dmenu="dmenu -i -fn 'Noto Sans:size=10'"
 bindsym $super+shift+d exec rofi -lines 12 -padding 18 -width 60 -location 0 -show drun -sidebar-mode -columns 3 -font 'Noto Sans 12'
 
 # Garuda Linux install
 bindsym $super+i exec sudo -E calamares
 
 # Lock screen
-bindsym $super+l exec i3lock -i $lockScreenWallpaper
+# bindsym $super+l exec i3lock -i $lockScreenWallpaper
+bindsym $super+l exec betterlockscreen -l dim
 
 # Screen brightness controls
 bindsym XF86MonBrightnessUp exec "xbacklight -inc 10; notify-send 'brightness up'"
@@ -125,7 +126,7 @@ bindsym $super+Shift+Print --release exec --no-startup-id i3-scrot -s
 
 # kill focused window
 bindsym $super+c kill
-bindsym $super+q kill
+#bindsym $super+q kill
 
 # change focus
 bindsym $super+Left focus left
@@ -171,8 +172,8 @@ bindsym $super+Shift+minus move scratchpad
 bindsym $super+minus scratchpad show
 
 #navigate workspaces next / previous
-bindsym $super+Ctrl+Right workspace next
-bindsym $super+Ctrl+Left workspace prev
+#bindsym $super+Ctrl+Right workspace next
+#bindsym $super+Ctrl+Left workspace prev
 
 
 # switch to workspace
@@ -214,45 +215,55 @@ bindsym $super+Shift+c reload
 bindsym $super+Shift+r restart
 
 # exit i3
+
 #bindsym $super+q exec "i3-nagbar -t warning -m 'Really, exit?' -b 'Yes' 'i3-msg exit'"
 
-# resize window (you can also use the mouse for that)
-mode "resize" {
-        bindsym Left resize shrink width 5 px or 5 ppt
-        bindsym Down resize grow height 5 px or 5 ppt
-        bindsym Up resize shrink height 5 px or 5 ppt
-        bindsym Right resize grow width 5 px or 5 ppt
-        bindsym Return mode "default"
-}
-bindsym $super+r mode "resize"
+# # resize window (you can also use the mouse for that)
+# mode "resize" {
+#
+#         bindsym Left resize shrink width 5 px or 5 ppt
+#         bindsym Right resize grow width 5 px or 5 ppt
+#         bindsym Down resize grow height 5 px or 5 ppt
+#         bindsym Up resize shrink height 5 px or 5 ppt
+#         bindsym Return mode "default"
+# }
+#
+# bindsym $super+r mode "resize"
+
+bindsym $super+Ctrl+Left resize shrink width 10 px or 5 ppt
+bindsym $super+Ctrl+Right resize grow width 10 px or 5 ppt
+bindsym $super+Ctrl+Down resize grow height 10 px or 5 ppt
+bindsym $super+Ctrl+Up resize shrink height 10 px or 5 ppt
+
+
+
+
 
 # change borders
-bindsym $super+u border none
-bindsym $super+y border pixel 0
-bindsym $super+n border normal
+#bindsym $super+u border none
+#bindsym $super+y border pixel 0
+#bindsym $super+n border normal
 
 
 # panel
 # Start i3bar to display a workspace bar
 
 bar {
-	position top
-  status_command exec /usr/bin/bumblebee-status -m spotify weather datetime cpu memory disk pasource pasink battery -p disk.format="{used}" memory.format="{used}" datetime.format="%a, %b %d | %H:%M:%S" traffic.showname=False -t iceberg-dark-powerline
-	#strip_workspace_numbers yes|no
-	#strip_workspace_name yes|no
-	colors {
+	 position top
+	 status_command exec /usr/bin/bumblebee-status -m spotify weather datetime cpu memory disk pasource pasink battery -p disk.format="{used}" memory.format="{used}" datetime.format="%a, %b %d | %H:%M:%S" traffic.showname=False -t iceberg-dark-powerline
+	 #strip_workspace_numbers yes|no
+	 #strip_workspace_name yes|no
+	 colors {
     background #000000
     statusline #FFFFFF
     separator  #666666
-
     focused_workspace  #4C7899 #285577 #FFFFFF
     active_workspace   #333333 #222222 #FFFFFF
     inactive_workspace #333333 #222222 #888888
     urgent_workspace   #2F343A #900000 #FFFFFF
     #binding_mode      #2F343A #900000 #FFFFFF
-    # colour of border, background, and text
-    }
-
+    #colour of border, background, and text
+   }
 }
 
 # Open specific applications in floating mode
@@ -286,7 +297,7 @@ for_window [class="(?i)virtualbox"] floating enable border normal
 for_window [class="Xfburn"] floating enable
 for_window [class="keepassxc"] floating enable
 for_window [class="garuda-welcome"] floating enable
-
+for_window [class="Zoom"] floating enable
 # window rules, you can find the window class using xprop
 for_window [class=".*"] border pixel 0
 
@@ -314,7 +325,7 @@ client.background           #2f343f
 
 # Set inner/outer gaps
 gaps inner 8
-gaps outer 4
+gaps outer 8
 
 # Additionally, you can issue commands with the following syntax. This is useful to bind keys to changing the gap size.
 # gaps inner|outer current|all set|plus|minus <px>

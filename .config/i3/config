@@ -34,7 +34,7 @@ set $preferredScreenCaptureTool /usr/bin/flameshot gui
 bindsym $super+b exec --no-startup-id $preferredBrowser;focus
 bindsym $super+F2 exec --no-startup-id $preferredMailClient;focus
 bindsym $super+e exec --no-startup-id $preferredFileManager;focus
-bindsym $super+F4 exec --no-startup-id $preferredTextEditor;focus
+bindsym $super+t exec --no-startup-id $preferredTextEditor;focus
 
 ### Screen Capturing & Print Screen: ###
 
@@ -55,6 +55,7 @@ font pango: source code pro 10
 floating_modifier $super
 
 #autostart
+exec_always --no-startup-id .cargo/bin/i3-auto-layout
 exec_always --no-startup-id "picom --experimental-backends"
 exec_always --no-startup-id ~/.fehbg
 exec --no-startup-id xsettingsd &
@@ -80,15 +81,14 @@ exec --no-startup-id "xinput set-prop \"MSFT0001:00 06CB:7F28 Touchpad\" \"libin
 exec --no-startup-id "xinput set-prop \"MSFT0001:00 06CB:7F28 Touchpad\" \"libinput Click Method Enabled\" 0 1"
 exec --no-startup-id "xinput set-prop \"MSFT0001:00 06CB:7F28 Touchpad\" \"libinput Natural Scrolling Enabled\" 1"
 
-
-
-
 # hide/unhide i3status bar
 bindsym $super+m bar mode toggle
 
 # start dmenu (a program launcher)
 bindsym $super+d exec --no-startup-id i3-dmenu-desktop --dmenu="dmenu -i -fn 'Noto Sans:size=10'"
-bindsym $super+shift+d exec --no-startup-id rofi -lines 12 -padding 18 -width 60 -location 0 -show drun -sidebar-mode -columns 3 -font 'Noto Sans 10'
+bindsym $alt+space exec --no-startup-id rofi -lines 5 -padding 18 -width 40 -location 0 -show drun -sidebar-mode -columns 3 -font 'Noto Sans 10'
+bindsym $super+r exec --no-startup-id rofi -lines 5 -padding 18 -width 40 -location 0 -show filebrowser -sidebar-mode -columns 3 -font 'Noto Sans 10'
+bindsym $super+w exec --no-startup-id rofi -lines 5 -padding 18 -width 40 -location 0 -show window -sidebar-mode -columns 3 -font 'Noto Sans 10'
 bindsym $super+p exec --no-startup-id ~/.local/bin/i3-quickterm
 
 # Garuda Linux install

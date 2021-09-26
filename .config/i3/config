@@ -86,7 +86,7 @@ bindsym $super+m bar mode toggle
 
 # start dmenu (a program launcher)
 bindsym $super+d exec --no-startup-id i3-dmenu-desktop --dmenu="dmenu -i -fn 'Noto Sans:size=10'"
-bindsym $alt+space exec --no-startup-id rofi -lines 5 -padding 18 -width 40 -location 0 -show drun -sidebar-mode -columns 3 -font 'Noto Sans 10'
+bindsym $alt+spacewexec --no-startup-id rofi -lines 5 -padding 18 -width 40 -location 0 -show drun -sidebar-mode -columns 3 -font 'Noto Sans 10'
 bindsym $super+r exec --no-startup-id rofi -lines 5 -padding 18 -width 40 -location 0 -show filebrowser -sidebar-mode -columns 3 -font 'Noto Sans 10'
 bindsym $super+w exec --no-startup-id rofi -lines 5 -padding 18 -width 40 -location 0 -show window -sidebar-mode -columns 3 -font 'Noto Sans 10'
 bindsym $super+p exec --no-startup-id ~/.local/bin/i3-quickterm

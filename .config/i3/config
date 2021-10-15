@@ -56,7 +56,8 @@ floating_modifier $super
 
 #autostart
 exec_always --no-startup-id .cargo/bin/i3-auto-layout
-exec_always --no-startup-id "picom --experimental-backends"
+exec_always --no-startup-id "picom" 
+# --experimental-backends"
 exec_always --no-startup-id ~/.fehbg
 exec --no-startup-id xsettingsd &
 exec --no-startup-id pasystray
@@ -261,43 +262,36 @@ bindsym $super+Shift+r restart
 # }
 #
 # bindsym $super+r mode "resize"
-
 bindsym $super+Ctrl+Left resize shrink width 10 px or 5 ppt
 bindsym $super+Ctrl+Right resize grow width 10 px or 5 ppt
 bindsym $super+Ctrl+Down resize grow height 10 px or 5 ppt
 bindsym $super+Ctrl+Up resize shrink height 10 px or 5 ppt
-
-
-
-
 
 # change borders
 #bindsym $super+u border none
 #bindsym $super+y border pixel 0
 #bindsym $super+n border normal
 
-
 # panel
 # Start i3bar to display a workspace bar
-
 bar {
-	 position top
-	 status_command exec /usr/bin/bumblebee-status -m spotify weather datetime cpu memory disk pasource pasink battery -p disk.format="{used}" memory.format="{used}" datetime.format="%a, %b %d | %H:%M:%S" traffic.showname=False -t iceberg-dark-powerline
-	 #strip_workspace_numbers yes|no
-	 #strip_workspace_name yes|no
-	 colors {
-    background #000000
-    statusline #FFFFFF
-    separator  #666666
-    focused_workspace  #4C7899 #285577 #FFFFFF
-    active_workspace   #333333 #222222 #FFFFFF
-    inactive_workspace #333333 #222222 #888888
-    urgent_workspace   #2F343A #900000 #FFFFFF
-    #binding_mode      #2F343A #900000 #FFFFFF
-    #colour of border, background, and text
-   }
-}
+    font pango:DejaVu Sans Mono, FontAwesome 10
+    position top
+    status_command i3status | ~/scripts/i3spotifystatus/pystatus.py
+#   status_command exec i3status-rs ~/.config/i3status-rust/config.toml
+#   status_command exec /usr/bin/bumblebee-status -m spotify weather datetime cpu memory disk pasource pasink battery -p disk.format="{used}" memory.format="{used}" datetime.format="%a, %b %d | %H:%M:%S" traffic.showname=False -t iceberg-dark-powerline
+#   status_command i3blocks  
+    colors {
 
+        separator #222222
+        background #222222
+        statusline #FFFFFF
+        focused_workspace #0088CC #0088CC #ffffff
+        active_workspace #333333 #333333 #ffffff
+        inactive_workspace #222222 #222222 #888888
+        urgent_workspace #2f343a #900000 #ffffff
+    }
+}
 # Open specific applications in floating mode
 for_window [title="alsamixer"] floating enable border pixel 0
 for_window [class="calamares"] floating enable border normal
@@ -330,6 +324,7 @@ for_window [class="Xfburn"] floating enable
 for_window [class="keepassxc"] floating enable
 for_window [class="garuda-welcome"] floating enable
 for_window [class="Display"] floating enable
+for_window [class="copyq"] floating enable
 # window rules, you can find the window class using xprop
 for_window [class=".*"] border pixel 0
 
@@ -355,10 +350,8 @@ client.background           #2f343f
 ### settings for i3-gaps: ###
 #############################
 
-# Set inner/outer gaps
-gaps inner 8
-gaps outer 8
-
+gaps inner 4
+gaps outer 4
 # Additionally, you can issue commands with the following syntax. This is useful to bind keys to changing the gap size.
 # gaps inner|outer current|all set|plus|minus <px>
 # gaps inner all set 10
